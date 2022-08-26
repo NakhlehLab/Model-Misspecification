@@ -35,3 +35,8 @@ do
 		done
 	done
 done
+
+/usr/bin/time -v python  collapse_short_gt_branch.py $dir_path $num_replicate short 2>$dir_path/medium/collapse_gt_polytomy.err
+/usr/bin/time -v python  collapse_short_gt_branch.py $dir_path $num_replicate medium 2>$dir_path/medium/collapse_gt_polytomy.err
+/usr/bin/time -v python  collapse_short_gt_branch.py $dir_path $num_replicate long   2>$dir_path/long/collapse_gt_polytomy.err
+
