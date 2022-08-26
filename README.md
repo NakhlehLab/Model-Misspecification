@@ -43,7 +43,7 @@ This is implemented in the code base of PhyloNet.
 Download:
 https://github.com/NakhlehLab/PhyloNet/releases
 
-Command line:
+Nexus line:
 ````
 MCMC_SEQ -cl 20000000 -bl 10000000 -sf 5000 -sd 12345 -pl 24 -tm <C:C_0;L:L_0;R:R_0;Q:Q_0>; 
 MCMC_SEQ -cl 20000000 -bl 10000000 -sf 5000 -sd 12345 -pl 24 -tm <C:C_0;L:L_0;R:R_0;Q:Q_0> -murate; 
