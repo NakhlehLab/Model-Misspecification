@@ -29,8 +29,13 @@ You can use CalGTProb Command in PhyloNet for each gene tree topology
 3. summarize_triplet_multitest.py
 4. plot figures with summarize_triplet_plot.py
 
-## Comparison
-
+## 4. Comparison
+### D3
+The scripts to run D3 are: D3_test/run_D3.sh and D3_test/run_D3_gt.sh
+### QuartetGoodnessFit
+1. Use run_quartet_probs.sh to prepare input files.
+2. Put mydata.jl and run_mydata.sh in to directory of QuartetGoodnessFit and run 
+3. summarize results with summarize_pval.py
 
 # Supporting per-locus rate heterogenety in MCMC_SEQ
 This is implemented in the code base of PhyloNet.
