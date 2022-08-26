@@ -13,7 +13,7 @@ do
 		for locus_length in 500 2000
 		do
 			mkdir $dir/$scale/
-			simulation_script/$level/gen_tree_taxa5_$scale.sh $dir/$scale/ $locus_length $poprate $re_start $re_end $num_loci
+			simulation/script/$level/gen_tree_taxa5_$scale.sh $dir/$scale/ $locus_length $poprate $re_start $re_end $num_loci
 			#simulate markers with locus heterogeneous
 			for((i=$re_start;i<=$re_end;++i))
 			do
@@ -28,7 +28,7 @@ do
 				do 
 						echo iqtree $i
 						rep_dir=$dir/$scale/$i
-						./simulation/infer_iqtree.sh $rep_dir/homo/ $rep_dir/heter/ 6 10000 $poprate "Z" $locus_length &
+						simulation/infer_iqtree.sh $rep_dir/homo/ $rep_dir/heter/ 6 10000 $poprate "Z" $locus_length &
 					done
 				wait
 			done
@@ -36,7 +36,7 @@ do
 	done
 done
 
-/usr/bin/time -v python  collapse_short_gt_branch.py $dir_path $num_replicate short 2>$dir_path/medium/collapse_gt_polytomy.err
-/usr/bin/time -v python  collapse_short_gt_branch.py $dir_path $num_replicate medium 2>$dir_path/medium/collapse_gt_polytomy.err
-/usr/bin/time -v python  collapse_short_gt_branch.py $dir_path $num_replicate long   2>$dir_path/long/collapse_gt_polytomy.err
+/usr/bin/time -v python  simulation/collapse_short_gt_branch.py $dir_path $num_replicate short 2>$dir_path/medium/collapse_gt_polytomy.err
+/usr/bin/time -v python  simulation/collapse_short_gt_branch.py $dir_path $num_replicate medium 2>$dir_path/medium/collapse_gt_polytomy.err
+/usr/bin/time -v python  simulation/collapse_short_gt_branch.py $dir_path $num_replicate long   2>$dir_path/long/collapse_gt_polytomy.err
 
