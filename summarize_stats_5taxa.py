@@ -13,7 +13,6 @@ from rpy2.robjects.conversion import localconverter
 from pathlib import Path
 
 from calculator import *
-from eval_5taxa import DDOF
 
 N_TAXA = 5
 DEBUG=False

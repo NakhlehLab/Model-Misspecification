@@ -1,6 +1,5 @@
 import pandas as pd
 import seaborn as sns
-from scipy.special import rel_entr
 import sys
 from scipy.stats import power_divergence
 from summarize_triplet_probs import divide_triplet
