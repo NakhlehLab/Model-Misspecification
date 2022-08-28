@@ -1,0 +1,23 @@
+	Command being timed: "java -jar /home/zc36/X2/PhyloNet.jar /home/zc36/X2/mcmc/net0//long/1/homo/2000/ML_true_1.nex"
+	User time (seconds): 2682.38
+	System time (seconds): 93.45
+	Percent of CPU this job got: 1579%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 2:55.68
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 10698988
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 1723167
+	Voluntary context switches: 6290265
+	Involuntary context switches: 2174748
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 344
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

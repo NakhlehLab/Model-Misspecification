@@ -1,0 +1,6 @@
+/scratch/zc36/X2/mcmc/net0//medium/5/heter/2000/mcmcseq/0_0/
+Exception in thread "main" java.lang.NullPointerException
+	at edu.rice.cs.bioinfo.programs.phylonet.algos.MCMCseq.util.Tools.readSeq(Tools.java:33)
+	at edu.rice.cs.bioinfo.programs.phylonet.algos.MCMCseq.core.Resumer.multiRuns(Resumer.java:106)
+	at edu.rice.cs.bioinfo.programs.phylonet.algos.MCMCseq.core.Resumer.main(Resumer.java:26)
+srun: error: bc9u15n1: task 0: Exited with exit code 1

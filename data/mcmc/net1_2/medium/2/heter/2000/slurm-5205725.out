@@ -1,0 +1,21 @@
+/scratch/zc36/X2/mcmc/net1_2//medium/2/heter/2000/mcmcseq/0_0/
+52
+java.lang.Exception: /scratch/zc36/X2/mcmc/net1_2/medium/2/heter/2000/mcmcseq/0_0/20000000_0/lastState.txt:Error opening file saving last states!
+	at edu.rice.cs.bioinfo.programs.phylonet.algos.MCMCseq.core.State.<init>(State.java:68)
+	at edu.rice.cs.bioinfo.programs.phylonet.algos.MCMCseq.core.MC3Core.<init>(MC3Core.java:50)
+	at edu.rice.cs.bioinfo.programs.phylonet.algos.MCMCseq.core.Resumer.multiRuns(Resumer.java:125)
+	at edu.rice.cs.bioinfo.programs.phylonet.algos.MCMCseq.core.Resumer.main(Resumer.java:26)
+org.apache.commons.math3.exception.NotStrictlyPositiveException: scale (0)
+	at org.apache.commons.math3.distribution.GammaDistribution.<init>(GammaDistribution.java:171)
+	at org.apache.commons.math3.distribution.GammaDistribution.<init>(GammaDistribution.java:129)
+	at org.apache.commons.math3.distribution.GammaDistribution.<init>(GammaDistribution.java:111)
+	at edu.rice.cs.bioinfo.programs.phylonet.algos.MCMCseq.structs.PopulationSize.setGammaMean(PopulationSize.java:36)
+	at edu.rice.cs.bioinfo.programs.phylonet.algos.MCMCseq.core.State.<init>(State.java:142)
+	at edu.rice.cs.bioinfo.programs.phylonet.algos.MCMCseq.core.MC3Core.<init>(MC3Core.java:50)
+	at edu.rice.cs.bioinfo.programs.phylonet.algos.MCMCseq.core.Resumer.multiRuns(Resumer.java:125)
+	at edu.rice.cs.bioinfo.programs.phylonet.algos.MCMCseq.core.Resumer.main(Resumer.java:26)
+Exception in thread "main" java.lang.RuntimeException: No main MC3 chain found!!!
+	at edu.rice.cs.bioinfo.programs.phylonet.algos.MCMCseq.core.MC3Core.multipleRun(MC3Core.java:322)
+	at edu.rice.cs.bioinfo.programs.phylonet.algos.MCMCseq.core.Resumer.multiRuns(Resumer.java:126)
+	at edu.rice.cs.bioinfo.programs.phylonet.algos.MCMCseq.core.Resumer.main(Resumer.java:26)
+srun: error: bc9u11n4: task 0: Exited with exit code 1

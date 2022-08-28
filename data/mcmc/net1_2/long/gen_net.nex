@@ -1,0 +1,5 @@
+#NEXUS
+
+BEGIN PHYLONET;
+SimSeqInNetwork -theta 0.0050 -base (0.2112,0.2888,0.2896,0.2104) -rate (0.2173,0.9798,0.2575,0.1038,1,0.2070)  -numgt 100 -sitespergt 2000  -mspath "/home/zc36/lib/msdir/ms"  -seqgenpath "/home/zc36/lib/Seq-Gen-1.3.4/source/seq-gen"  -tm <C:C_0;G:G_0;L:L_0;Q:Q_0;R:R_0;Z:Z_0> -truenet "(((((Q:0.75,#H1:0.25::0.3):0.75,R:1.5):2.5,(L:0.5)#H1:3.5::0.7):1,(C:2,G:2):3):10,Z:15);" -out "/home/zc36/X2/mcmc/net1_2//long//10/homo/2000/markers.txt"  -gtfile "/home/zc36/X2/mcmc/net1_2//long//10/homo/2000/genetrees.txt";
+END;
