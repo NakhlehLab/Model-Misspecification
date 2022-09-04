@@ -11,73 +11,6 @@ import sys
 types = ["tree", "net", "AZ"]
 types_map = {"tree":"Scenario A", "net": "Scenario B", "AZ": "Scenario C"}
 
-# def plot_replica_mcmc_net_result(path, figpath):
-#     data = pd.read_csv(path)
-#     fig, axes = plt.subplots(2, 3, figsize=(18, 10))
-
-#     print(data)
-#     print(data[data["type"] == "tree"])
-#     tree_data = data[(data["type"] == "tree") & (data["murate"] == True) & (data["homo"] == True)]
-
-#     print(tree_data)
-#     types = ["tree", "net", "AZ"]
-#     homo_map = {"False": "Hetero", "True": "Homo"}
-#     murate_map = {"False": "without DEO", "True": "with DEO"}
-    
-#     # distance
-#     for i in range(len(types)):
-#         for homo in [True, False]:
-#             for murate in [True, False]:
-#                 print(data[(data["type"] == types[i]) &  (data["homo"] == homo) & (data["murate"] == murate)]["distance"].mean())
-        
-#         sns.boxplot(x='homo', y='distance', hue='murate', hue_order=[True, False],
-#                     data=data[data["type"] == types[i]], 
-#                     width= 0.2, orient='v',  ax=axes[0][i], 
-#                     palette="Set2"
-#                     )
-        
-#         axes[0][i].set_xlabel("", fontsize=20)
-#         axes[0][i].set_ylabel("", fontsize=20)
-#         print(axes[0][i].get_yticklabels())
-#         axes[0][i].set_xticklabels([homo_map[t.get_text()] for t in axes[0][i].get_xticklabels()], size=20)
-#         axes[0][i].set_ylim(-0.2, 10)
-#         axes[0][i].tick_params(axis='y', labelsize=12)
-#         axes[0][i].set_title(types_map[types[i]], size=20, fontweight="bold")
-#         axes[0][i].get_legend().remove()
-#         print(types[i])
-#         # print(data[data["type"] == types[i] & data["murate"] == ""] )
-#     axes[0][0].set_ylabel("Distance", fontsize=20)
-
-#     # reticulation
-#     for i in range(len(types)):
-#         sns.boxplot(x='homo', y='inferred_reti', hue='murate', hue_order=[True, False],
-#             data=data[data["type"] == types[i]], width= 0.2, orient='v',  
-#             ax=axes[1][i], palette="Set2", edgecolor="none",
-#             showmeans=True,
-#             meanprops={"marker":"o",
-#             "markerfacecolor":"pink", 
-#             "markeredgecolor":"black",
-#             "markersize":"8"})
-
-#         axes[1][i].set_xlabel("", fontsize=20)
-#         axes[1][i].set_ylabel("", fontsize=20)
-#         axes[1][i].set_xticklabels([homo_map[t.get_text()] for t in axes[1][i].get_xticklabels()], size=20)
-#         axes[1][i].set_ylim(-0.2, 5)
-#         axes[1][i].tick_params(axis='y', labelsize=12)
-#         # axes[1][i].set_title(types[i], size=20, fontweight="bold")
-#         axes[1][i].get_legend().remove()
-#     axes[1][0].set_ylabel("Inferred # of reticulations", fontsize=20)
-
-
-#     handles, labels = axes[1][2].get_legend_handles_labels()
-#     new_labels = [murate_map[x] for x in labels[0:2]]
-
-#     print(handles, labels)
-
-#     fig.legend(handles, new_labels, loc='lower center', fontsize=20, ncol=2)
-#     plt.tight_layout(rect=[0, 5, 1, 1])
-#     plt.savefig(figpath, dpi=300)
-
 
 def plot_replica_mcmc_net_hist_result(path1, path2, figpath):
     data1 = pd.read_csv(path1)
@@ -91,8 +24,7 @@ def plot_replica_mcmc_net_hist_result(path1, path2, figpath):
 
     print(tree_data)
     types = ["tree", "net"]
-    # homo_map = {"False": "SR data", "True": "DR data"}
-    # murate_map = {"False": "SR inference", "True": "DR inference"}
+   
 
     diffs = []
     for index, row in data.iterrows():
@@ -271,57 +203,6 @@ def summarize_iqtree_error_to_csv(mcmc_dir, locus_length, type_net, csv_path):
     df = pd.DataFrame.from_dict(data)
     df.to_csv(csv_path)
 
-
-# def plot_gt_error(path, figpath, y=""):
-#     data = pd.read_csv(path)
-#     f, axes = plt.subplots(2, 1, figsize=(6, 10))
-#     homo_map = {"False": "Hetero", "True": "Homo"}
-#     ys = ["RF", "nrBS"]
-    
-#     for i in range(len(ys)):
-#         sns.boxplot(x='type', y=ys[i], hue='homo', data=data, width=0.2, orient='v',
-#                 palette="Set2", ax=axes[i])
-#         axes[i].set_xlabel("", fontsize=20)
-    
-#         if ys[i] == "RF":
-#             axes[i].set_ylabel("RF Distance", fontsize=18)
-#         elif ys[i] == "nrBS":
-#             axes[i].set_ylabel("nrBS", fontsize=18)
-#         axes[i].get_legend().remove()
-#         axes[i].tick_params(axis='y', labelsize=12)
-#         axes[i].tick_params(axis='x', labelsize=12)
-
-#     handles, labels = axes[1].get_legend_handles_labels()
-#     new_labels = [homo_map[x] for x in labels[0:2]]
-
-#     f.legend(handles, new_labels, loc='lower center', fontsize=16, ncol=2, )
-    
-    
-#     plt.tight_layout()
-#     f.subplots_adjust(bottom=0.1, hspace=0.1)
-#     plt.savefig(figpath+y+".pdf", dpi=300)
-
-
-# def plot_CoV(path, figpath):
-#     data = pd.read_csv(path)
-#     f, axes = plt.subplots( figsize=(8, 5))
-#     types = ["tree", "net", "AZ"]
-#     print(data)
-#     sns.boxplot(x='type', y="CoV" , data=data, width=0.2, orient='v', color="skyblue",
-#               ax=axes)
-#     axes.set_xlabel("", fontsize=20)
-#     axes.set_ylabel("CoV of mutation rates", fontsize=20)
-
-#     # l = plt.legend(handles[0:2], new_labels, loc=2, borderaxespad=0., fontsize=16)
-#     axes.tick_params(axis='y', labelsize=16)
-#     axes.tick_params(axis='x', labelsize=16)
-#     plt.tight_layout(pad=1.0)
-#     # plt.savefig("/Users/zhen/Desktop/Zhen/research/phylogenetics/tree_sim/paper/replica_iqtree_CoV.pdf", dpi=300)
-#     plt.savefig(figpath, dpi=300)
-#     for i in range(len(types)):
-#         data_type = data[data["type"] == types[i]]
-#         print(types[i], data_type["CoV"].mean(), data_type["CoV"].median())
-
 def summarize_replica_ML_result_to_csv(dir, type, locus_length, csv_path):
     homos = ["heter", "homo"]
     gt_types = ["true", "iq"]
@@ -352,58 +233,6 @@ def summarize_replica_ML_result_to_csv(dir, type, locus_length, csv_path):
     df = pd.DataFrame.from_dict(data)
     df.to_csv(csv_path)
 
-# def plot_ML_ll_trend(csv_path, figpath):
-#     data = pd.read_csv(csv_path)
-#     types = ["tree", "net", "AZ"]
-#     pd.set_option("display.max_rows", None, "display.max_columns", None)
-
-#     homos_map = {True: "Homo", False: "Hetero"}
-#     gtt_map = {True: "True", False: "IQTREE"}
-
-#     fig, axes = plt.subplots(3, 4, figsize=(18, 10))
-#     y_range = [30, 45, 25]
-
-#     for i in range(len(types)):
-#         df = data[data["type"] == types[i]]
-#         j = 0
-#         for homo in [True, False]:
-#             for gtt in [True, False]:
-#                 subplot_data = df[(df["homo"] == homo) & (df["gtt"] == gtt)]
-#                 sns.lineplot(data=subplot_data, x="reti_set", y="likelihood", hue="index", ax=axes[i][j], alpha=0.5, linewidth=1.0)
-#                 sns.lineplot(data=subplot_data, x="reti_set", y="likelihood", ax=axes[i][j], ci=None, linewidth=2)
-
-#                 axes[i][j].set_xlabel("", fontsize=20)
-#                 axes[i][j].set_ylabel("", fontsize=16)
-#                 print(subplot_data["likelihood"].min()-1)
-#                 if i == 0:
-#                     axes[i][j].set_title(homos_map[homo]+"&"+gtt_map[gtt], size=16)
-#                 # handles, labels = axes[i][j].get_legend_handles_labels()
-#                 axes[i][j].get_legend().remove()
-#                 axes[i][j].set_xticks(range(4))
-#                 lower_value = subplot_data["likelihood"].min() - 1
-#                 print(y_range[i])
-#                 axes[i][j].set_ylim(lower_value, lower_value + y_range[i] + 2)
-#                 axes[i][j].tick_params(axis='y', labelsize=12)
-#                 axes[i][j].tick_params(axis='x', labelsize=12)
-#                 j += 1
-
-#             # new_labels = [murate_map[x] for x in labels[0:2]]
-#         axes[i][0].set_ylabel(types[i], size=20, fontweight="bold")
-
-#     axes[2][0].set_xlabel("set # of reticulations", fontsize=16)
-#     axes[2][1].set_xlabel("set # of reticulations", fontsize=16)
-#     axes[2][2].set_xlabel("set # of reticulations", fontsize=16)
-#     axes[2][3].set_xlabel("set # of reticulations", fontsize=16)
-
-#     # plt.tight_layout(pad=1.5)
-#     handles, labels = axes[1][2].get_legend_handles_labels()
-#     # new_labels = [murate_map[x] for x in labels[0:2]]
-
-#     print(handles, labels)
-
-#     # fig.legend(handles, labels, loc='lower center', fontsize=20, ncol=5)
-#     plt.tight_layout(rect=[0, 5, 1, 1])
-#     plt.savefig(figpath, dpi=300)
 
 def plot_ML_ll_trend_difference(csv_path1, csv_path2, figpath):
     pd.set_option("display.max_rows", None, "display.max_columns", None)
@@ -414,10 +243,7 @@ def plot_ML_ll_trend_difference(csv_path1, csv_path2, figpath):
     gtt_map = {True: "True", False: "IQTREE"}
 
     fig, axes = plt.subplots(3, 2, figsize=(14, 10))
-    # plt.xlabel("common X")
-    # plt.ylabel("common Y")
-    # fig.text(0.5, 0.04, 'common X', ha='center')
-    # fig.text(0.04, 0.5, 'common Y', va='center', rotation='vertical')
+    
     
     diffs = []
     for index, row in data.iterrows():
@@ -471,12 +297,7 @@ def plot_ML_ll_trend_difference(csv_path1, csv_path2, figpath):
             # new_labels = [murate_map[x] for x in labels[0:2]]
         axes[0][i].set_title(types_map[types[i]], size=16,  fontweight="bold")
 
-    # axes[2][0].set_xlabel("set # of reticulations", fontsize=16)
-    # axes[2][1].set_xlabel("set # of reticulations", fontsize=16)
-    # axes[2][2].set_xla bel("set # of reticulations", fontsize=16)
-    # axes[2][3].set_xlabel("set # of reticulations", fontsize=16)
-    # plt.xlabel("set # of reticulations",fontsize=16)
-    # plt.ylabel("relative log-likelihood",fontsize=16)
+    
     fig.text(0.5, 0.04, 'Set # of reticulations', ha='center', fontsize=18, fontweight="bold")
     fig.text(0.04, 0.5, 'Relative log-likelihood', va='center', rotation='vertical', fontsize=18, fontweight="bold")
     # plt.tight_layout(pad=1.5)
@@ -489,53 +310,6 @@ def plot_ML_ll_trend_difference(csv_path1, csv_path2, figpath):
     plt.tight_layout(rect=[0, 5, 1, 1])
     plt.savefig(figpath, dpi=300)
     plt.show()
-
-# def plot_ML_distance(csv_path, figpath):
-#     data = pd.read_csv(csv_path, dtype={"distance":np.float64})
-#     types = ["tree", "net", "AZ"]
-#     pd.set_option("display.max_rows", None, "display.max_columns", None)
-
-#     homo_map = {"False": "Hetero", "True": "Homo"}
-#     gtt_map = {"False": "IQ-TREE", "True": "True gene tree"}
-
-#     f, axes = plt.subplots(1, 3, figsize=(18, 5))
-#     reti_map = {"tree": 0, "net": 1, "AZ": 0}
-#     for i in range(len(types)):
-#         print(types[i])
-#         for homo in [True, False]:
-#             for gtt in [True, False]:
-#                 print(types[i], reti_map[types[i]], homo, gtt)
-#                 # print(data[(data["type"] == types[i]) & (data["reti_set"] == reti_map[types[i]]) & (data["homo"] == homo) ])
-#                 print(data[(data["type"] == types[i]) & (data["reti_set"] == reti_map[types[i]]) &  (data["homo"] == homo) & (data["gtt"] == gtt)]["distance"].mean())
-        
-#         sns.boxplot(x='homo', y='distance', hue='gtt',
-#                     data=data[(data["type"] == types[i]) & (data["reti_set"] == reti_map[types[i]])],
-#                     width= 0.2, orient='v',  ax=axes[i], palette="Set2",
-#                     showmeans=True,
-#                     meanprops={"marker":"o",
-#                     "markerfacecolor":"pink", 
-#                     "markeredgecolor":"black",
-#                     "markersize":"8"})
-
-#         axes[i].set_xlabel("", fontsize=20)
-#         axes[i].set_ylabel("", fontsize=20)
-#         axes[i].set_xticklabels([homo_map[t.get_text()] for t in axes[i].get_xticklabels()], size=20)
-#         axes[i].set_ylim(-0.2, 7)
-#         axes[i].tick_params(axis='y', labelsize=12)
-#         axes[i].set_title(types_map[types[i]], size=20, fontweight="bold")
-#     handles, labels = axes[0].get_legend_handles_labels()
-#     axes[0].get_legend().remove()
-#     axes[1].get_legend().remove()
-#     axes[2].get_legend().remove()
-#     axes[0].set_ylabel("Distance", fontsize=20)
-
-#     print(handles, labels)
-#     new_labels = [gtt_map[x] for x in labels[0:2]]
-#     # l = plt.legend(handles[0:2], new_labels, bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., fontsize=16)
-#     f.legend(handles, new_labels, loc='lower center', fontsize=20, ncol=2, )
-#     f.subplots_adjust(bottom=0.25, wspace = 0.3)
-#     # plt.tight_layout(pad=1.5)
-#     plt.savefig(figpath, dpi=300)
 
 
 def plot_ML_distance_hist(csv_path1, csv_path2, figpath):
@@ -652,102 +426,6 @@ def summarize_mcmc_gt_error_to_csv(mcmc_dir, locus_length, type_net, csv_path):
     df.to_csv(csv_path)
 
 
-# def plot_mcmc_gt_error(csv_path, figpath, y="RF"):
-#     data = pd.read_csv(csv_path)
-#     f, axes = plt.subplots(1, 3, figsize=(18, 5))
-
-#     types = ["tree", "net", "AZ"]
-#     homo_map = {"False": "Heterogeneity", "True": "Homogeneity"}
-#     murate_map = {"False": "without DEO", "True": "with DEO"}
-#     for i in range(len(types)):
-#         sns.boxplot(x='homo', y=y, hue='murate', data=data[data["type"] == types[i]], width=0.2, orient='v',
-#                     ax=axes[i], palette="Set2")
-
-#         axes[i].set_xlabel("", fontsize=20)
-#         if y == "RF":
-#             axes[i].set_ylabel("RF Distance", fontsize=20)
-#         elif y == "nrBS":
-#             axes[i].set_ylabel("nrBS", fontsize=20)
-#         axes[i].set_xticklabels([homo_map[t.get_text()] for t in axes[i].get_xticklabels()], size=20)
-#         axes[i].tick_params(axis='y', labelsize=16)
-#         axes[i].set_title(types[i], size=20, fontweight="bold")
-#     handles, labels = axes[0].get_legend_handles_labels()
-#     axes[0].get_legend().remove()
-#     axes[1].get_legend().remove()
-#     axes[2].get_legend().remove()
-
-#     print(handles, labels)
-#     new_labels = [murate_map[x] for x in labels[0:2]]
-#     f.legend(handles, new_labels, loc='lower center', fontsize=20, ncol=2, )
-#     # f.set_tight_layout(True)
-
-#     f.subplots_adjust(bottom=0.25, wspace = 0.3)
-#     plt.savefig(figpath+"_"+y+".pdf", dpi=300)
-
-
-# def plot_gt_error_mcmc_iqtree(csv_mcmc, csv_iq, figpath):
-#     # data = pd.read_csv(csv_iq)
-#     data = pd.read_csv(csv_mcmc)
-#     data_iq = pd.read_csv(csv_iq)
-#     data = data.append(data_iq, ignore_index = True)
-#     data['murate'] = data['murate'].replace(True, 1).replace(False, 2).fillna(3)
-#     data = data.astype({'murate': 'int32'})
-#     # print(data)
-
-#     f, axes = plt.subplots(2, 2, figsize=(18, 12))
-
-#     types = ["tree", "net", "AZ"]
-#     metrics = ["RF", "nrBS"]
-#     # metrics = ["RF"]
-#     homo = [False, True]
-#     homo_map = {"False": "Hetero", "True": "Homo"}
-#     murate_map = {'2': "without DEO", '1': "with DEO", '3': "IQ-TREE"}
-#     print(data)
-#     for i in range(len(metrics)):
-#         for j in range(len(homo)):
-#             for murate in [1, 2, 3]:
-#                 for k in range(len(types)):
-#                     print(types[k], homo[j], murate_map[str(murate)])
-#                     # print(data[(data["type"] == types[k]) & (data["homo"] == homo[j]) &  (data["murate"] == murate)])
-#                     print(data[(data["type"] == types[k]) & (data["homo"] == homo[j]) &  (data["murate"] == murate)][metrics[i]].mean())
-#                 print("------------------------------")
-#                 print(homo[j], murate_map[str(murate)],metrics[i])
-#                 print(data[(data["homo"] == homo[j]) &  (data["murate"] == murate)][metrics[i]].mean())
-
-#             sns.boxplot(x='type', y=metrics[i], hue='murate', 
-#                         data=data[data["homo"] == homo[j]], 
-#                         width=0.2, orient='v',
-#                         ax=axes[i][j], palette="Set2",
-#                         # showmeans=True,
-#                         # meanprops={"marker":"o",
-#                         # "markerfacecolor":"pink", 
-#                         # "markeredgecolor":"black",
-#                         # "markersize":"8"}
-#                         )
-
-#             axes[i][j].set_xlabel("", fontsize=20)
-#             if metrics[i] == "RF":
-#                 axes[i][j].set_ylabel("nrRF", fontsize=20)
-#             elif metrics[i] == "nrBS":
-#                 axes[i][j].set_ylabel("nrBS", fontsize=20)
-#             axes[i][j].tick_params(axis='y', labelsize=16)
-#             axes[i][j].tick_params(axis='x', labelsize=16)
-#             axes[i][j].set_xticklabels([types_map[t.get_text()] for t in axes[i][j].get_xticklabels()], size=20)
-
-#             if i == 0:
-#                 axes[i][j].set_title(homo_map[str(homo[j])], size=20, fontweight="bold")
-#                 axes[i][j].set_ylim(0, 0.25)
-#             elif i == 1:
-#                 axes[i][j].set_ylim(0, 0.8)
-#             axes[i][j].get_legend().remove()
-#     handles, labels = axes[0][0].get_legend_handles_labels()
-
-#     new_labels = [murate_map[x] for x in labels[0:3]]
-#     f.legend(handles, new_labels, loc='lower center', fontsize=20, ncol=3, )
-#     # f.set_tight_layout(True)
-#     f.subplots_adjust(bottom=0.1, hspace=0.1, wspace = 0.15)
-#     plt.savefig(figpath, dpi=300)
-
 def plot_gt_error_mcmc_iqtree_subfig(csv_mcmc1, csv_iq1, csv_mcmc2, csv_iq2, figpath, metric):
     data = pd.concat([pd.read_csv(csv_mcmc1), pd.read_csv(csv_mcmc2)])
     data_iq = pd.concat([pd.read_csv(csv_iq1), pd.read_csv(csv_iq2)])
@@ -810,10 +488,6 @@ def plot_gt_error_mcmc_iqtree_subfig(csv_mcmc1, csv_iq1, csv_mcmc2, csv_iq2, fig
 def summarize_mcmc_murate_error_to_csv(mcmc_dir, locus_length, net_type, csv_path, burnin=0):
     # types = ["tree", "net"]
     data = {"type": [], "index": [], "loci":[], "true_mu":[], "inferred_mu":[]}
-    # inferred_mu_rates = []
-    # all_true_rates = []
-    # all_inferred_rates = []
-
 
     for j in range(1, 11):
         path = mcmc_dir + "/" + str(j) + "/heter/"+str(locus_length)+"/murate/"
@@ -875,6 +549,10 @@ def plot_mcmc_ess(csv_path, fig_path):
 
 
 if __name__ == '__main__':
+    bl = 2000000
+    sf = 5000
+    burnin=50
+
     fig_dir = "/Users/zhen/Desktop/Zhen/research/phylogenetics/X2/data/mcmc/"
     # path1 = "/Users/zhen/Desktop/Zhen/research/phylogenetics/X2/data/mcmc/net0/long/mcmc_result.csv"
     # path2 = "/Users/zhen/Desktop/Zhen/research/phylogenetics/X2/data/mcmc/net1_2/long/mcmc_result.csv"
@@ -888,49 +566,40 @@ if __name__ == '__main__':
 
     experiment_dir1 = "/Users/zhen/Desktop/Zhen/research/phylogenetics/X2/data/mcmc/net0/long/"
     experiment_dir2 = "/Users/zhen/Desktop/Zhen/research/phylogenetics/X2/data/mcmc/net1_2/long/"
-    burnin=50
+    
     # experiment_dir1 = "/Users/zhen/Desktop/Zhen/research/phylogenetics/X2/data/mcmc/net0/medium/"
     # experiment_dir2 = "/Users/zhen/Desktop/Zhen/research/phylogenetics/X2/data/mcmc/net1_2/medium/"
     mcmc_murate_csv1 = experiment_dir1+"MCMC_murates.csv"
     mcmc_murate_csv2 = experiment_dir2+"MCMC_murates.csv"
-    # summarize_mcmc_murate_error_to_csv(experiment_dir1, 2000, "tree", mcmc_murate_csv1, burnin=burnin)
-    # summarize_mcmc_murate_error_to_csv(experiment_dir2, 2000, "net", mcmc_murate_csv2, burnin=burnin)
-
+    summarize_mcmc_murate_error_to_csv(experiment_dir1, 2000, "tree", mcmc_murate_csv1, burnin=burnin)
+    summarize_mcmc_murate_error_to_csv(experiment_dir2, 2000, "net", mcmc_murate_csv2, burnin=burnin)
+    mcmc_murate_fig = fig_dir+"/MCMC_murates_medium.pdf"
+    plot_mcmc_murates(mcmc_murate_csv1, mcmc_murate_csv2, mcmc_murate_fig)  
 
     
     ML_result_csv1 = experiment_dir1+"/ML_result.csv"
     ML_result_csv2 = experiment_dir2+"/ML_result.csv"
-    # summarize_replica_ML_result_to_csv(experiment_dir1, "tree", 2000, ML_result_csv1)
-    # summarize_replica_ML_result_to_csv(experiment_dir2, "net", 2000, ML_result_csv2)
-
+   
 
     ML_fig_trend_diff_path = fig_dir + "replica_ML_trend_diff.pdf"
     ML_dist_hist_fig_path = fig_dir + "ML_distance_hist.pdf"
-    # plot_ML_ll_trend_difference(ML_result_csv1, ML_result_csv2, ML_fig_trend_diff_path)
-    # plot_ML_distance_hist(ML_result_csv1, ML_result_csv2, ML_dist_hist_fig_path)
-
-   
-
-    mcmc_murate_fig = fig_dir+"/MCMC_murates_medium.pdf"
-    # plot_mcmc_murates(mcmc_murate_csv1, mcmc_murate_csv2, mcmc_murate_fig)
+    plot_ML_ll_trend_difference(ML_result_csv1, ML_result_csv2, ML_fig_trend_diff_path)
+    plot_ML_distance_hist(ML_result_csv1, ML_result_csv2, ML_dist_hist_fig_path)
 
     gt_error_csv1 = experiment_dir1 + "/MCMC_gt_err.csv"
    
     gt_err_fig_rf = fig_dir + "/replica_gt_err_rf.pdf"
     gt_err_fig_nrbs = fig_dir + "/replica_gt_err_nrbs.pdf"
 
-    bl = 2000000
-    sf = 5000
-    # summarize_mcmc_gt_error_to_csv(sys.argv[1], 2000, "tree", sys.argv[1] + "/MCMC_gt_err.csv")
-    # summarize_mcmc_gt_error_to_csv(sys.argv[2], 2000, "net", sys.argv[2] + "/MCMC_gt_err.csv")
-    # summarize_iqtree_error_to_csv(sys.argv[1], 2000, "tree", sys.argv[1] + "/iq_gt_err.csv")
-    # summarize_iqtree_error_to_csv(sys.argv[2], 2000, "net", sys.argv[2] + "/iq_gt_err.csv")
-    
+    summarize_mcmc_gt_error_to_csv(sys.argv[1], 2000, "tree", sys.argv[1] + "/MCMC_gt_err.csv")
+    summarize_mcmc_gt_error_to_csv(sys.argv[2], 2000, "net", sys.argv[2] + "/MCMC_gt_err.csv")
+    summarize_iqtree_error_to_csv(sys.argv[1], 2000, "tree", sys.argv[1] + "/iq_gt_err.csv")
+    summarize_iqtree_error_to_csv(sys.argv[2], 2000, "net", sys.argv[2] + "/iq_gt_err.csv")
     
     mcmc_gt_csv1 = experiment_dir1+"/MCMC_gt_err.csv"
     mcmc_gt_csv2 = experiment_dir2+"/MCMC_gt_err.csv"
     iqtree_err_csv1 = experiment_dir1+"/iq_gt_err.csv"
     iqtree_err_csv2 = experiment_dir2+"/iq_gt_err.csv"
 
-    # plot_gt_error_mcmc_iqtree_subfig(mcmc_gt_csv1, iqtree_err_csv1, mcmc_gt_csv2, iqtree_err_csv2, gt_err_fig_rf, "RF")
-    # plot_gt_error_mcmc_iqtree_subfig(mcmc_gt_csv1, iqtree_err_csv1, mcmc_gt_csv2, iqtree_err_csv2, gt_err_fig_nrbs, "nrBS")
+    plot_gt_error_mcmc_iqtree_subfig(mcmc_gt_csv1, iqtree_err_csv1, mcmc_gt_csv2, iqtree_err_csv2, gt_err_fig_rf, "RF")
+    plot_gt_error_mcmc_iqtree_subfig(mcmc_gt_csv1, iqtree_err_csv1, mcmc_gt_csv2, iqtree_err_csv2, gt_err_fig_nrbs, "nrBS")
