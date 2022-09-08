@@ -3,20 +3,6 @@ import dendropy
 from dendropy.calculate import treecompare
 import sys
 
-# n = 4  # number of rows
-# m = 500  # number of colums
-
-# outgroup = "G_0"
-
-# TREE = 1
-# heter_mode = {1: "heter", 2: "heter_locus", 3: "homo"}
-# tree_mode = {1:"tree/", 2:"net/"}
-# replica = "1"
-# folder = tree_mode[TREE]+heter_mode[HETER]+"/"+replica
-#
-# marker_path = "/Users/zhen/Desktop/Zhen/research/phylogenetics/tree_sim/data/simulation/seqgen/" + folder + "/markers.txt"
-# dirname = "/Users/zhen/Desktop/Zhen/research/phylogenetics/tree_sim/data/simulation/seqgen/" + folder + "/IQTREE/"
-
 
 def runIQ(marker_path, dirname, outgroup, num_species, locus_length):
     locus_to_seq = {}
