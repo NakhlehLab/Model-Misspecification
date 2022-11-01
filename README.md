@@ -37,7 +37,7 @@ The scripts to run D3 are: D3_test/run_D3.sh and D3_test/run_D3_gt.sh
 2. Put mydata.jl and run_mydata.sh in to directory of QuartetGoodnessFit and run 
 3. summarize results with summarize_pval.py
 
-# Supporting per-locus rate heterogenety in MCMC_SEQ
+# Supporting locus-specific substitution rates in MCMC_SEQ
 This is implemented in the code base of PhyloNet.
 
 Download:
